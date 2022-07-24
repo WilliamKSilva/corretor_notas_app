@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "corretor_notas",
+    "slug": "corretor_notas",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
