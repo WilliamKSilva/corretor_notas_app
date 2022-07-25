@@ -5,9 +5,10 @@ type InputFormProps = {
   name: string;
   placeholder: string;
   required: boolean;
+  type: 'default' | 'numeric' | 'phone-pad';
 }
 
-export const InputForm = ({ name, placeholder, required }: InputFormProps) => {
+export const InputForm = ({ name, placeholder, required, type }: InputFormProps) => {
   const { control } = useForm();
 
   return (
@@ -22,6 +23,7 @@ export const InputForm = ({ name, placeholder, required }: InputFormProps) => {
             onChangeText={onChange}
             value={value}
             placeholder={placeholder}
+            keyboardType={type}
           />
         )}
         name={name}
