@@ -1,11 +1,11 @@
 import "tailwindcss-react-native/types.d";
 import { TailwindProvider } from 'tailwindcss-react-native';
-import RegisterClient from "./src/screens/RegisterClient";
+import Navigation from "./src/navigation";
 
 export default function App() {
   return (
     <TailwindProvider>
-      <RegisterClient />
+      <Navigation />
     </TailwindProvider>
   );
 }

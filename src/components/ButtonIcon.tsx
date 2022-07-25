@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, Text } from 'react-native'
+import { TouchableOpacity, View, Text } from 'react-native';
 
 type ButtonIconProps = {
   title: string;
