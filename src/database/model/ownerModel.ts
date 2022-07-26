@@ -1,5 +1,5 @@
 import { Model } from "@nozbe/watermelondb";
-import { field } from "@nozbe/watermelondb/decorators";
+import { field, date } from "@nozbe/watermelondb/decorators";
 
 export class OwnerModel extends Model {
   static table = 'owners'
@@ -16,8 +16,8 @@ export class OwnerModel extends Model {
   @field('method')
   method!: string;
 
-  @field('date')
-  date!: string;
+  @date('created_at')
+  created_at: number;
 
   @field('value')
   value!: number;

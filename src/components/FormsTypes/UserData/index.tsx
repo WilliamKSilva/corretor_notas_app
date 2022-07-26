@@ -1,14 +1,15 @@
 import { View, Text } from 'react-native';
-import { InputForm } from '../../../components/Input/InputForm';
+import { InputForm } from '../../Input/InputForm';
+import { Container, Header } from './styles';
 
 export const UserData = () => {
   return (
-    <View className="flex-1 pb-8 items-center">
-      <View className="w-full items-start pt-7">
+    <Container>
+      <Header>
         <Text className="text-base text-black-100">
           Dados do Cliente:
         </Text>
-      </View>
+      </Header>
       <InputForm
         name="name"
         placeholder="Nome..."
@@ -27,7 +28,7 @@ export const UserData = () => {
         type="default"
         required
       />
-    </View>
+    </Container>
   );
 };
 

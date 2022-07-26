@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form'
-import { Input } from './index';
+import { Input } from '../index';
 
 type InputFormProps = {
   name: string;

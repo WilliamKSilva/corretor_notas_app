@@ -20,8 +20,8 @@ export const purchaserSchema = tableSchema({
       type: 'string'
     },
     {
-      name: 'date',
-      type: 'string'
+      name: 'created_at',
+      type: 'number'
     },
     {
       name: 'value',

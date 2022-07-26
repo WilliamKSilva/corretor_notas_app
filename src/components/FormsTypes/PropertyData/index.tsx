@@ -1,5 +1,5 @@
-import { Text, View } from "react-native";
-import { InputForm } from "../../../components/Input/InputForm";
+import { Container, Text } from './styles';
+import { InputForm } from "../../Input/InputForm";
 
 type PropertyDataType = {
   type: 'owner' | 'purchaser';
@@ -7,11 +7,11 @@ type PropertyDataType = {
 
 export const PropertyData = ({ type }: PropertyDataType) => {
   return (
-    <View className="w-full items-start">
-      <Text className="text-base text-black-100">
+    <Container>
+      <Text>
         Dados do Imóvel:
       </Text>
-      {type === 'purchaser' ? (
+      {type === 'owner' ? (
         <>
           <InputForm
             name="value"
@@ -60,6 +60,6 @@ export const PropertyData = ({ type }: PropertyDataType) => {
           />
         </>
       )}
-    </View>
+    </Container>
   );
 };

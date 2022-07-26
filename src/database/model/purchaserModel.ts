@@ -16,8 +16,8 @@ export class PurchaserModel extends Model {
   @field('method')
   method!: string;
 
-  @field('date')
-  date!: string;
+  @field('created_at')
+  created_at: number;
 
   @field('value')
   value!: number;

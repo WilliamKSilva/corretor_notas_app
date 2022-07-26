@@ -1,25 +1,54 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
 import { Button } from "../../components/Button";
 import { ButtonIcon } from "../../components/ButtonIcon";
-import { FontAwesome5 } from '@expo/vector-icons';
 import { Text } from "../../components/Text";
+import { FontAwesome5 } from '@expo/vector-icons';
 import { PurchaserForm, OwnerForm } from "./Forms";
 import { useRegisterClient } from "./useRegisterClient";
+import { Container, Header, ScrollView, WrapperButton, Message } from "./styles";
 
 export default function RegisterClient() {
-  const { selectedClientType, setSelectedClientType } = useRegisterClient();
+  const { isOwnerActivate, isPurchaserActivate, setIsOwnerActivate, setIsPurchaserActivate } = useRegisterClient();
+
+  const handleOnPurchaser = () => {
+    setIsPurchaserActivate(!isPurchaserActivate);
+    setIsOwnerActivate(false);
+  }
+
+  const handleOnOwner = () => {
+    setIsOwnerActivate(!isOwnerActivate);
+    setIsPurchaserActivate(false);
+  }
+
+  const handleShowForms = () => {
+
+    if (isOwnerActivate) {
+      return (
+        <OwnerForm />
+      )
+    }
+
+    if (isPurchaserActivate) {
+      return (
+        <PurchaserForm />
+      )
+    }
+
+    return (
+      <Message>Selecione uma opção...</Message>
+    );
+  }
 
   return (
-    <View className="flex-1 items-center bg-slate-100">
+    <Container>
       <Text>
         Cadastre um Cliente:
       </Text>
-      <View className="w-11/12 flex-row p-2 justify-between">
+      <Header>
         <ButtonIcon
           title="Proprietário"
-          onPress={() => setSelectedClientType('purchaser')}
-          type={selectedClientType}
+          onPress={() => handleOnPurchaser()}
+          active={isPurchaserActivate}
         >
           <FontAwesome5
             name="house-user"
@@ -29,8 +58,8 @@ export default function RegisterClient() {
         </ButtonIcon>
         <ButtonIcon
           title="Comprador"
-          onPress={() => setSelectedClientType('owner')}
-          type={selectedClientType}
+          onPress={() => handleOnOwner()}
+          active={isOwnerActivate}
         >
           <FontAwesome5
             name="money-bill-alt"
@@ -38,17 +67,13 @@ export default function RegisterClient() {
             color="#0284C7"
           />
         </ButtonIcon>
-      </View>
-      <ScrollView className="w-3/4 pt-15">
-        {selectedClientType === 'owner' ? (
-          <OwnerForm />
-        ) : (
-          <PurchaserForm />
-        )}
+      </Header>
+      <ScrollView>
+        {handleShowForms()}
       </ScrollView>
-      <View className="p-9">
-        <Button title="Salvar Cliente" onClick={() => console.log('teste')} />
-      </View>
-    </View>
+      <WrapperButton>
+        <Button title="Salvar Cliente" onPress={() => console.log('teste')} />
+      </WrapperButton>
+    </Container>
   )
 }
