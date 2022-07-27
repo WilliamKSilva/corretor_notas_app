@@ -1,16 +1,21 @@
+import { useEffect, useState } from "react";
 import { database } from "../../database";
 import { PurchaserModel } from "../../database/model/purchaserModel";
 
 
 export function useListClient() {
+  const [purchasers, setPurchasers] = useState<PurchaserModel[]>([]);
 
-  async function fetchData() {
-    const purchaserCollection = database.get<PurchaserModel>('purchasers');
-    const response = await purchaserCollection.query().fetch();
-    console.log(response);
-  }
+  useEffect(() => {
+    (async function fetchData() {
+      const purchaserCollection = database.get<PurchaserModel>('purchasers');
+      const response = await purchaserCollection.query().fetch();
+
+      setPurchasers(response);
+    })();
+  }, [])
 
   return {
-    fetchData
+    purchasers
   }
 }

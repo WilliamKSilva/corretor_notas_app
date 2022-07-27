@@ -1,16 +1,15 @@
-import { Controller, useForm } from 'react-hook-form'
+import { Control, Controller, useForm } from 'react-hook-form'
 import { Input } from '../index';
 
 type InputFormProps = {
   name: string;
+  control: Control;
   placeholder: string;
   required: boolean;
   type: 'default' | 'numeric' | 'phone-pad';
 }
 
-export const InputForm = ({ name, placeholder, required, type }: InputFormProps) => {
-  const { control } = useForm();
-
+export const InputForm = ({ name, control, placeholder, required, type }: InputFormProps) => {
   return (
     <>
       <Controller

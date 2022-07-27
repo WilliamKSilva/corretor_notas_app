@@ -1,13 +1,27 @@
-import { Button, View } from "react-native";
+import { Container, Content, Header, List, Text } from "./styles";
+import { Client, ClientProps } from "../../components/Client";
 import { useListClient } from "./useListClient";
 
 
 export default function ListClient() {
-  const { fetchData } = useListClient();
+  const { purchasers } = useListClient();
 
   return (
-    <View>
-      <Button onPress={() => fetchData()} title="teste" />
-    </View>
+    <Container>
+      <Header>
+        <Text>Filtre seus clientes</Text>
+      </Header>
+      <Content>
+        <List
+          data={purchasers}
+          keyExtractor={(item: any) => item.id}
+          renderItem={({ item }: ClientProps) => (
+            <Client
+              item={item}
+            />
+          )}
+        />
+      </Content>
+    </Container>
   )
 }

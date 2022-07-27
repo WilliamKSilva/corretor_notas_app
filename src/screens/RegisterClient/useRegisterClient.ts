@@ -56,6 +56,8 @@ export function useRegisterClient() {
   }
 
   async function handleCreatePurchaser(data: CreatePurchaserData) {
+    console.log(data.name);
+
     await database.write(async () => {
       await database.get<PurchaserModel>('purchasers').create(purchaser => {
         purchaser.name = data.name,

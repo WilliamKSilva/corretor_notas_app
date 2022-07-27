@@ -1,21 +1,26 @@
+import { Control } from 'react-hook-form';
 import { PropertyData } from '../../../components/FormsTypes/PropertyData';
 import { UserData } from '../../../components/FormsTypes/UserData';
 import { Container } from './styles';
 
-export const PurchaserForm = () => {
+type FormProps = {
+  control: Control;
+}
+
+export const PurchaserForm = ({ control }: FormProps) => {
   return (
     <Container>
-      <UserData />
-      <PropertyData type="purchaser" />
+      <UserData control={control} />
+      <PropertyData control={control} type="purchaser" />
     </Container>
   );
 };
 
-export const OwnerForm = () => {
+export const OwnerForm = ({ control }: FormProps) => {
   return (
     <Container>
-      <UserData />
-      <PropertyData type="owner" />
+      <UserData control={control} />
+      <PropertyData control={control} type="owner" />
     </Container>
   );
 };

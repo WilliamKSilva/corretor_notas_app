@@ -9,7 +9,7 @@ import { Container, Header, ScrollView, WrapperButton, Message, WrapperOptionsBu
 import { useForm } from "react-hook-form";
 
 export default function RegisterClient() {
-  const { handleSubmit } = useForm();
+  const { handleSubmit, control } = useForm();
 
   const {
     isOwnerActivate,
@@ -23,13 +23,13 @@ export default function RegisterClient() {
 
     if (isOwnerActivate) {
       return (
-        <OwnerForm />
+        <OwnerForm control={control} />
       )
     }
 
     if (isPurchaserActivate) {
       return (
-        <PurchaserForm />
+        <PurchaserForm control={control} />
       )
     }
 
