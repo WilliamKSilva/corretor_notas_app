@@ -21,7 +21,6 @@ declare module 'styled-components' {
 
       text: string;
       placeholder: string;
-      border: string;
 
       white: string;
       black: string;

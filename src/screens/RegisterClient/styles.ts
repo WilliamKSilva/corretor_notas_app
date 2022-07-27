@@ -7,24 +7,31 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+  padding-top: 10%;
+`;
+
+export const WrapperOptionsButton = styled.View`
   width: 80%;
   flex-direction: row;
-  padding: 5px;
+  margin-top: ${({ theme }) => theme.constants.custom_margin_medium}%;
   justify-content: space-between;
 `;
 
 export const ScrollView = styled.ScrollView`
+  flex: 1;
   width: 90%;
-  padding-top: 20%;
 `;
 
 export const WrapperButton = styled.View`
-  padding: 10px;
+  padding: 19px;
 `;
 
 export const Message = styled.Text`
   width: 100%;
-  margin-top: 50%;
+  margin-top: 40%;
   margin-left: 25%;
   font-size: ${({ theme }) => theme.fontsize.font_medium}px;
   color: ${({ theme }) => theme.colors.placeholder};

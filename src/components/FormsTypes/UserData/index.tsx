@@ -1,12 +1,11 @@
-import { View, Text } from 'react-native';
 import { InputForm } from '../../Input/InputForm';
-import { Container, Header } from './styles';
+import { Container, Header, Text } from './styles';
 
 export const UserData = () => {
   return (
     <Container>
       <Header>
-        <Text className="text-base text-black-100">
+        <Text>
           Dados do Cliente:
         </Text>
       </Header>

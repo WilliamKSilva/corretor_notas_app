@@ -1,5 +1,4 @@
-import { TouchableOpacity, View, Text } from 'react-native';
-import { Container } from './styles';
+import { Container, Text } from './styles';
 
 type ButtonIconProps = {
   title: string;
@@ -10,8 +9,8 @@ type ButtonIconProps = {
 
 export const ButtonIcon = ({ title, active, onPress, children }: ButtonIconProps) => {
   return (
-    <Container onPress={onPress} active={active}>
-      <Text className="font-bold text-base pr-2">{title}</Text>
+    <Container onPress={() => onPress()} active={active}>
+      <Text>{title}</Text>
       {children}
     </Container>
   );
