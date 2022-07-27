@@ -22,6 +22,9 @@ export class PurchaserModel extends Model {
   @field('value')
   value!: number;
 
+  @field('city')
+  city!: string;
+
   @field('region')
   region!: string;
 }

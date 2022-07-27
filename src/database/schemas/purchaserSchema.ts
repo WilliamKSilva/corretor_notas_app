@@ -28,6 +28,10 @@ export const purchaserSchema = tableSchema({
       type: 'number'
     },
     {
+      name: 'city',
+      type: 'string'
+    },
+    {
       name: 'region',
       type: 'string'
     }

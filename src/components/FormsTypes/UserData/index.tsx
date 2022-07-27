@@ -27,6 +27,12 @@ export const UserData = () => {
         type="default"
         required
       />
+      <InputForm
+        name="method"
+        placeholder="Método..."
+        type="default"
+        required
+      />
     </Container>
   );
 };

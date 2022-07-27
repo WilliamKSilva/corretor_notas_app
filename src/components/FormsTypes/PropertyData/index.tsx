@@ -11,12 +11,18 @@ export const PropertyData = ({ type }: PropertyDataType) => {
       <Text>
         Dados do Imóvel:
       </Text>
-      {type === 'owner' ? (
+      {type === 'purchaser' ? (
         <>
           <InputForm
             name="value"
             placeholder="Valor médio do imóvel desejado..."
             type="numeric"
+            required
+          />
+          <InputForm
+            name="city"
+            placeholder="Cidade..."
+            type="default"
             required
           />
           <InputForm

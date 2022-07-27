@@ -6,19 +6,18 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { PurchaserForm, OwnerForm } from "./Forms";
 import { useRegisterClient } from "./useRegisterClient";
 import { Container, Header, ScrollView, WrapperButton, Message, WrapperOptionsButton } from "./styles";
+import { useForm } from "react-hook-form";
 
 export default function RegisterClient() {
-  const { isOwnerActivate, isPurchaserActivate, setIsOwnerActivate, setIsPurchaserActivate } = useRegisterClient();
+  const { handleSubmit } = useForm();
 
-  const handleOnPurchaser = () => {
-    setIsPurchaserActivate(!isPurchaserActivate);
-    setIsOwnerActivate(false);
-  }
-
-  const handleOnOwner = () => {
-    setIsOwnerActivate(!isOwnerActivate);
-    setIsPurchaserActivate(false);
-  }
+  const {
+    isOwnerActivate,
+    isPurchaserActivate,
+    handleOnOwner,
+    handleOnPurchaser,
+    handleCreatePurchaser
+  } = useRegisterClient();
 
   const handleShowForms = () => {
 
@@ -48,8 +47,8 @@ export default function RegisterClient() {
         <WrapperOptionsButton>
           <ButtonIcon
             title="Proprietário"
-            onPress={() => handleOnPurchaser()}
-            active={isPurchaserActivate}
+            onPress={() => handleOnOwner()}
+            active={isOwnerActivate}
           >
             <FontAwesome5
               name="house-user"
@@ -59,8 +58,8 @@ export default function RegisterClient() {
           </ButtonIcon>
           <ButtonIcon
             title="Comprador"
-            onPress={() => handleOnOwner()}
-            active={isOwnerActivate}
+            onPress={() => handleOnPurchaser()}
+            active={isPurchaserActivate}
           >
             <FontAwesome5
               name="money-bill-alt"
@@ -74,7 +73,7 @@ export default function RegisterClient() {
         {handleShowForms()}
       </ScrollView>
       <WrapperButton>
-        <Button title="Salvar Cliente" onPress={() => console.log('teste')} />
+        <Button title="Salvar Cliente" onPress={handleSubmit(handleCreatePurchaser)} />
       </WrapperButton>
     </Container>
   )
