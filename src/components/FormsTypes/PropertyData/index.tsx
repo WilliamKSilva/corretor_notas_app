@@ -1,6 +1,7 @@
 import { Container, Text } from './styles';
 import { InputForm } from "../../Input/InputForm";
 import { Control } from 'react-hook-form';
+import { InputMaskForm } from '../../Input/InputMaskForm';
 
 type PropertyDataProps = {
   type: 'owner' | 'purchaser';
@@ -15,11 +16,12 @@ export const PropertyData = ({ type, control }: PropertyDataProps) => {
       </Text>
       {type === 'purchaser' ? (
         <>
-          <InputForm
+          <InputMaskForm
             name="value"
             control={control}
             placeholder="Valor médio do imóvel desejado..."
             type="numeric"
+            mask="currency"
             required
           />
           <InputForm
@@ -39,11 +41,12 @@ export const PropertyData = ({ type, control }: PropertyDataProps) => {
         </>
       ) : (
         <>
-          <InputForm
+          <InputMaskForm
             name="value"
             control={control}
             placeholder="Valor médio do imóvel desejado..."
             type="numeric"
+            mask="currency"
             required
           />
           <InputForm

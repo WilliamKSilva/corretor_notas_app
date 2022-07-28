@@ -1,18 +1,17 @@
 import React from "react";
-import { Container, Text } from "./styles";
+import { Container, Phone, Text } from "./styles";
 
 export type ClientProps = {
-  item: {
-    id: string;
-    name: string;
-    phone: string;
-  }
+  id: string;
+  name: string;
+  phone: string;
 }
 
-export const Client = ({ item }: ClientProps) => {
+export const Client = ({ id, name, phone }: ClientProps) => {
   return (
     <Container>
-      <Text>{item.name}</Text>
+      <Text>{name}</Text>
+      <Phone>{phone}</Phone>
     </Container>
   );
 };

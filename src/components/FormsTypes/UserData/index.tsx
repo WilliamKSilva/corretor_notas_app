@@ -1,5 +1,6 @@
 import { Control } from 'react-hook-form';
 import { InputForm } from '../../Input/InputForm';
+import { InputMaskForm } from '../../Input/InputMaskForm';
 import { Container, Header, Text } from './styles';
 
 type UserDataProps = {
@@ -21,11 +22,12 @@ export const UserData = ({ control }: UserDataProps) => {
         type="default"
         required
       />
-      <InputForm
+      <InputMaskForm
         name="phone"
         control={control}
-        placeholder="Telefone..."
+        placeholder="Número de telefone..."
         type="phone-pad"
+        mask="phone"
         required
       />
       <InputForm
