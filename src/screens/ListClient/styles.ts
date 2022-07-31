@@ -37,7 +37,6 @@ export const Image = styled.Image``;
 
 export const Message = styled.Text`
   text-align: center;
-  padding-top: 10%;
   font-size: ${({ theme }) => theme.fontsize.font_medium}px;
   font-weight: 300;
   color: ${({ theme }) => theme.colors.black};

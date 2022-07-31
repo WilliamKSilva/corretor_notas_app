@@ -7,6 +7,7 @@ import { PurchaserForm, OwnerForm } from "./Forms";
 import { useRegisterClient } from "./useRegisterClient";
 import { Container, Header, ScrollView, WrapperButton, Message, WrapperOptionsButton } from "./styles";
 import { useForm } from "react-hook-form";
+import { NativeModal } from "../../components/NativeModal";
 
 export default function RegisterClient() {
   const { handleSubmit, control } = useForm();
@@ -16,7 +17,10 @@ export default function RegisterClient() {
     isPurchaserActivate,
     handleOnOwner,
     handleOnPurchaser,
-    handleCreatePurchaser
+    handleCreatePurchaser,
+    message,
+    showModal,
+    setShowModal
   } = useRegisterClient();
 
   const handleShowForms = () => {
@@ -75,6 +79,7 @@ export default function RegisterClient() {
       <WrapperButton>
         <Button title="Salvar Cliente" onPress={handleSubmit(handleCreatePurchaser)} />
       </WrapperButton>
+      <NativeModal description={message} isVisible={showModal} setIsVisible={setShowModal} />
     </Container>
   )
 }

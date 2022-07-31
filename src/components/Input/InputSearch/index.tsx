@@ -1,13 +1,10 @@
 import { TextInputProps } from 'react-native';
+import { TextInput } from './styles';
 
-interface InputSearch extends TextInputProps {
-
-}
-
-export const InputSearch = ({ ...rest }: TextInputProps) => {
+export const InputSearch = ({ placeholder, ...rest }: TextInputProps) => {
   return (
-    <div>
-
-    </div>
+    <>
+      <TextInput placeholder={placeholder} {...rest} />
+    </>
   );
 };

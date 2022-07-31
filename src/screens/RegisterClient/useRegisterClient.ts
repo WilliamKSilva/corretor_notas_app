@@ -26,9 +26,13 @@ type CreatePurchaserData = {
   region: string;
 }
 
+type ToastType = 'error' | 'success';
+
 export function useRegisterClient() {
   const [isOwnerActivate, setIsOwnerActivate] = useState(false);
   const [isPurchaserActivate, setIsPurchaserActivate] = useState(false);
+  const [message, setMessage] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   const handleOnPurchaser = () => {
     setIsPurchaserActivate(!isPurchaserActivate);
@@ -56,20 +60,28 @@ export function useRegisterClient() {
   }
 
   async function handleCreatePurchaser(data: CreatePurchaserData) {
-    console.log(data.name);
+    try {
+      console.log(data.name);
 
-    await database.write(async () => {
-      await database.get<PurchaserModel>('purchasers').create(purchaser => {
-        purchaser.name = data.name,
-          purchaser.city = data.city,
-          purchaser.description = data.description,
-          purchaser.phone = data.phone,
-          purchaser.created_at = Number(new Date()),
-          purchaser.method = data.method,
-          purchaser.value = data.value,
-          purchaser.region = data.region
-      })
-    });
+      await database.write(async () => {
+        await database.get<PurchaserModel>('purchasers').create(purchaser => {
+          purchaser.name = data.name,
+            purchaser.city = data.city,
+            purchaser.description = data.description,
+            purchaser.phone = data.phone,
+            purchaser.created_at = Number(new Date()),
+            purchaser.method = data.method,
+            purchaser.value = data.value,
+            purchaser.region = data.region
+        })
+      });
+
+      setMessage('Cliente cadastrado com sucesso');
+      setShowModal(!showModal);
+    } catch (error) {
+      setMessage('Erro ao cadastrar cliente');
+      setShowModal(!showModal);
+    }
   }
 
   return {
@@ -77,6 +89,9 @@ export function useRegisterClient() {
     isPurchaserActivate,
     handleOnPurchaser,
     handleOnOwner,
-    handleCreatePurchaser
+    handleCreatePurchaser,
+    message,
+    showModal,
+    setShowModal
   }
 }

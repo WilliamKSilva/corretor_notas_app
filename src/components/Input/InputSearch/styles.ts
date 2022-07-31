@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
 export const TextInput = styled.TextInput`
-  width: 90%;
+  width: 70%;
+  margin-top: 50px;
   padding: 10px;
-  margin-top: 18px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.colors.input};
 `;

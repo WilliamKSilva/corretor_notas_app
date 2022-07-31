@@ -6,6 +6,8 @@ import SelectDropdown from 'react-native-select-dropdown';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "styled-components/native";
 import { Text } from "../../components/Text";
+import { InputSearch } from "../../components/Input/InputSearch";
+import { useState } from "react";
 
 
 type ListClientProps = {
@@ -16,9 +18,31 @@ type ListClientProps = {
   }
 };
 
+type teste = {
+  name: string;
+}
+
 export default function ListClient() {
   const { purchasers, clientType, owners, setClientType } = useListClient();
   const { colors } = useTheme();
+
+  const [newData, setNewData] = useState([]);
+
+  const filterClients = (value: string) => {
+    let newData = [];
+
+    if (clientType.label === 'Compradores') {
+      purchasers.filter((client) => {
+        newData = client.name.toLowerCase().match(value);
+      });
+    }
+
+    owners.filter((client) => {
+      newData = client.name.toLowerCase().match(value);
+    });
+
+    setNewData(newData);
+  }
 
   const showClientsMessage = purchasers.length === 0 && owners.length === 0;
 
@@ -63,6 +87,12 @@ export default function ListClient() {
             />
           )}
         />
+        {!showClientsMessage ? (
+          <InputSearch
+            placeholder="Procure um cliente pelo nome..."
+            onChangeText={(value) => filterClients(value)}
+          />
+        ) : null}
       </WrapperDropdown>
       <Content>
         {showClientsMessage ? (
@@ -74,7 +104,7 @@ export default function ListClient() {
           </>
         ) : (
           <List
-            data={clientType.data === "owners" ? owners : purchasers}
+            data={newData}
             keyExtractor={(item: any) => item.id}
             renderItem={({ item }: ListClientProps) => (
               <Client
