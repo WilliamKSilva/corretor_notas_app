@@ -1,6 +1,6 @@
 import { Container, Content, Header, Image, List, Message, WrapperDropdown } from "./styles";
 import { Client } from "../../components/Client";
-import { useListClient } from "./useListClient";
+import { ClientData, useListClient } from "./useListClient";
 import SearchingImage from '../../assets/undraw_Searching.png';
 import SelectDropdown from 'react-native-select-dropdown';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -23,28 +23,32 @@ type teste = {
 }
 
 export default function ListClient() {
-  const { purchasers, clientType, owners, setClientType } = useListClient();
+  const { purchasers, clientType, owners, setClientType, newData, setNewData, handleSelectClientType } = useListClient();
   const { colors } = useTheme();
 
-  const [newData, setNewData] = useState([]);
-
   const filterClients = (value: string) => {
-    let newData = [];
-
-    if (clientType.label === 'Compradores') {
-      purchasers.filter((client) => {
-        newData = client.name.toLowerCase().match(value);
+    if (clientType.data === 'purchaser') {
+      const purchasersFiltered = purchasers.filter((client) => {
+        if (!value) return true;
+        if (client.name.toLowerCase().includes(value)) {
+          return true;
+        }
       });
-    }
 
-    owners.filter((client) => {
-      newData = client.name.toLowerCase().match(value);
-    });
+      setNewData(purchasersFiltered);
+    };
 
-    setNewData(newData);
-  }
+    if (clientType.data === 'owner') {
+      const purchasersFiltered = purchasers.filter((client) => {
+        if (!value) return true;
+        if (client.name.toLowerCase().includes(value)) {
+          return true;
+        }
+      });
 
-  const showClientsMessage = purchasers.length === 0 && owners.length === 0;
+      setNewData(purchasersFiltered);
+    };
+  };
 
   const dropdownOptions = [
     {
@@ -55,7 +59,7 @@ export default function ListClient() {
       data: "owner",
       label: "Proprietários"
     }
-  ]
+  ];
 
   return (
     <Container>
@@ -65,7 +69,7 @@ export default function ListClient() {
       <WrapperDropdown>
         <SelectDropdown
           data={dropdownOptions}
-          onSelect={(value) => setClientType(value)}
+          onSelect={(value) => handleSelectClientType(value)}
           defaultButtonText="Tipos de cliente"
           buttonTextAfterSelection={(selectedItem) => {
             return selectedItem.label;
@@ -87,34 +91,26 @@ export default function ListClient() {
             />
           )}
         />
-        {!showClientsMessage ? (
-          <InputSearch
-            placeholder="Procure um cliente pelo nome..."
-            onChangeText={(value) => filterClients(value)}
-          />
-        ) : null}
+
+        <InputSearch
+          placeholder="Procure um cliente pelo nome..."
+          onChangeText={(value) => filterClients(value)}
+        />
+
       </WrapperDropdown>
       <Content>
-        {showClientsMessage ? (
-          <>
-            <Message>Você ainda não possui clientes cadastrados!</Message>
-            <Image
-              source={SearchingImage}
+        <List
+          data={newData}
+          keyExtractor={(item: any) => item.id}
+          renderItem={({ item }: ListClientProps) => (
+            <Client
+              name={item.name}
+              phone={item.phone}
+              id={item.id}
             />
-          </>
-        ) : (
-          <List
-            data={newData}
-            keyExtractor={(item: any) => item.id}
-            renderItem={({ item }: ListClientProps) => (
-              <Client
-                name={item.name}
-                phone={item.phone}
-                id={item.id}
-              />
-            )}
-          />
-        )}
+          )}
+        />
+
       </Content>
     </Container>
   )
