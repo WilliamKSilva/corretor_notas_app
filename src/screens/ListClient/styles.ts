@@ -24,13 +24,13 @@ export const WrapperDropdown = styled.View`
 `;
 
 export const Content = styled.View`
-  width: 90%;
+  width: 100%;
   align-items: center;
   padding-top: 10%;
 `;
 
 export const List = styled.FlatList`
-  width: 100%;
+  
 `;
 
 export const Image = styled.Image``;

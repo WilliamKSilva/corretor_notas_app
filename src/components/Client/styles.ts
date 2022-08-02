@@ -1,12 +1,12 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-  width: 100%;
+export const Container = styled.TouchableOpacity`
+  width: 340px;
   min-height: 130px;
   padding: ${({ theme }) => theme.constants.custom_padding_large}%;
-  padding-bottom: 8%;
+  margin-bottom: 8%;
   border-radius: 8px;
-  elevation: 4;
+  elevation: 5;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.input};
 `;

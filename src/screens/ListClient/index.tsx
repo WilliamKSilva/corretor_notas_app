@@ -23,7 +23,7 @@ type teste = {
 }
 
 export default function ListClient() {
-  const { purchasers, clientType, owners, setClientType, newData, setNewData, handleSelectClientType } = useListClient();
+  const { purchasers, clientType, owners, newData, setNewData, handleSelectClientType } = useListClient();
   const { colors } = useTheme();
 
   const filterClients = (value: string) => {
@@ -32,21 +32,21 @@ export default function ListClient() {
         if (!value) return true;
         if (client.name.toLowerCase().includes(value)) {
           return true;
-        }
+        };
       });
 
       setNewData(purchasersFiltered);
     };
 
     if (clientType.data === 'owner') {
-      const purchasersFiltered = purchasers.filter((client) => {
+      const ownersFiltered = owners.filter((client) => {
         if (!value) return true;
         if (client.name.toLowerCase().includes(value)) {
           return true;
         }
       });
 
-      setNewData(purchasersFiltered);
+      setNewData(ownersFiltered);
     };
   };
 
@@ -64,7 +64,7 @@ export default function ListClient() {
   return (
     <Container>
       <Header>
-        <Text>Filtre seus clientes</Text>
+        <Text>Filtre seus clientes:</Text>
       </Header>
       <WrapperDropdown>
         <SelectDropdown
@@ -110,7 +110,6 @@ export default function ListClient() {
             />
           )}
         />
-
       </Content>
     </Container>
   )

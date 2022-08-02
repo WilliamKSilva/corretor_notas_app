@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { database } from "../../database";
 import { OwnerModel } from "../../database/model/ownerModel";
 import { PurchaserModel } from "../../database/model/purchaserModel";
+import { useFocusEffect } from '@react-navigation/native';
 
 type ClientType = {
   data: 'purchaser' | 'owner';
@@ -35,9 +36,13 @@ export function useListClient() {
     setNewData(response);
   }
 
-  useEffect(() => {
-    getPurchasers();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const initialClientData = getPurchasers();
+
+      return () => initialClientData;
+    }, [])
+  );
 
   const handleSelectClientType = (value) => {
     setClientType(value);
