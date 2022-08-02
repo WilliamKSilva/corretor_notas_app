@@ -2,13 +2,39 @@ import { Container, Text } from './styles';
 import { InputForm } from "../../Input/InputForm";
 import { Control } from 'react-hook-form';
 import { InputMaskForm } from '../../Input/InputMaskForm';
+import { Dropdown } from '../../Dropdown';
 
 type PropertyDataProps = {
   type: 'owner' | 'purchaser';
   control: Control;
+  getCurrentDropdownValue: (value) => void;
 }
 
-export const PropertyData = ({ type, control }: PropertyDataProps) => {
+export const PropertyData = ({ type, control, getCurrentDropdownValue }: PropertyDataProps) => {
+
+  const options = [
+    {
+      label: "Norte",
+      data: "north"
+    },
+    {
+      label: "Sul",
+      data: "south"
+    },
+    {
+      label: "Leste",
+      data: "east"
+    },
+    {
+      label: "Oeste",
+      data: "west"
+    },
+    {
+      label: "Centro",
+      data: "center"
+    }
+  ]
+
   return (
     <Container>
       <Text>
@@ -31,12 +57,10 @@ export const PropertyData = ({ type, control }: PropertyDataProps) => {
             type="default"
             required
           />
-          <InputForm
-            name="region"
-            control={control}
-            placeholder="Região do imóvel desejado..."
-            type="default"
-            required
+          <Dropdown
+            options={options}
+            getCurrentValue={getCurrentDropdownValue}
+            placeholder="Região do imóvel..."
           />
         </>
       ) : (

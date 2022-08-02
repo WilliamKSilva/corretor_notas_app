@@ -1,14 +1,12 @@
 import { Container, Content, Header, Image, List, Message, WrapperDropdown } from "./styles";
 import { Client } from "../../components/Client";
-import { ClientData, useListClient } from "./useListClient";
+import { useListClient } from "./useListClient";
 import SearchingImage from '../../assets/undraw_Searching.png';
 import SelectDropdown from 'react-native-select-dropdown';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "styled-components/native";
 import { Text } from "../../components/Text";
 import { InputSearch } from "../../components/Input/InputSearch";
-import { useState } from "react";
-
 
 type ListClientProps = {
   item: {
@@ -27,7 +25,7 @@ export default function ListClient() {
   const { colors } = useTheme();
 
   const filterClients = (value: string) => {
-    if (clientType.data === 'purchaser') {
+    if (clientType.data === 'purchasers') {
       const purchasersFiltered = purchasers.filter((client) => {
         if (!value) return true;
         if (client.name.toLowerCase().includes(value)) {
@@ -38,7 +36,7 @@ export default function ListClient() {
       setNewData(purchasersFiltered);
     };
 
-    if (clientType.data === 'owner') {
+    if (clientType.data === 'owners') {
       const ownersFiltered = owners.filter((client) => {
         if (!value) return true;
         if (client.name.toLowerCase().includes(value)) {
@@ -52,11 +50,11 @@ export default function ListClient() {
 
   const dropdownOptions = [
     {
-      data: "purchaser",
+      data: "purchasers",
       label: "Compradores"
     },
     {
-      data: "owner",
+      data: "owners",
       label: "Proprietários"
     }
   ];
@@ -91,12 +89,10 @@ export default function ListClient() {
             />
           )}
         />
-
         <InputSearch
           placeholder="Procure um cliente pelo nome..."
           onChangeText={(value) => filterClients(value)}
         />
-
       </WrapperDropdown>
       <Content>
         <List
@@ -106,6 +102,7 @@ export default function ListClient() {
             <Client
               name={item.name}
               phone={item.phone}
+              clientType={clientType.data}
               id={item.id}
             />
           )}

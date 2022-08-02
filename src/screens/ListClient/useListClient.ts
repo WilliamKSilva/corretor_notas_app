@@ -5,7 +5,7 @@ import { PurchaserModel } from "../../database/model/purchaserModel";
 import { useFocusEffect } from '@react-navigation/native';
 
 type ClientType = {
-  data: 'purchaser' | 'owner';
+  data: 'purchasers' | 'owners';
   label: 'Compradores' | 'Proprietários';
 };
 
@@ -17,7 +17,7 @@ export interface ClientData {
 export function useListClient() {
   const [purchasers, setPurchasers] = useState<ClientData[]>([]);
   const [owners, setOwners] = useState<ClientData[]>([]);
-  const [clientType, setClientType] = useState<ClientType>({ label: 'Compradores', data: 'purchaser' });
+  const [clientType, setClientType] = useState<ClientType>({ label: 'Compradores', data: 'purchasers' });
   const [newData, setNewData] = useState([]);
 
   async function getPurchasers() {
@@ -47,11 +47,11 @@ export function useListClient() {
   const handleSelectClientType = (value) => {
     setClientType(value);
 
-    if (value.data === 'purchaser') {
+    if (value.data === 'purchasers') {
       getPurchasers();
     }
 
-    if (value.data === 'owner') {
+    if (value.data === 'owners') {
       getOwners();
     }
   };

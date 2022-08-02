@@ -8,6 +8,7 @@ export type ClientProps = {
   id: string;
   name: string;
   phone: string;
+  clientType: string;
 }
 
 type DetailsDataScreenProps = NativeStackNavigationProp<
@@ -15,11 +16,11 @@ type DetailsDataScreenProps = NativeStackNavigationProp<
   'DetailsClient'
 >;
 
-export const Client = ({ id, name, phone }: ClientProps) => {
+export const Client = ({ id, name, phone, clientType }: ClientProps) => {
   const { navigate } = useNavigation<DetailsDataScreenProps>();
 
   return (
-    <Container onPress={() => navigate('DetailsClient', { clientId: id })}>
+    <Container onPress={() => navigate('DetailsClient', { clientId: id, type: clientType })}>
       <Text>{name}</Text>
       <Phone>{phone}</Phone>
     </Container>

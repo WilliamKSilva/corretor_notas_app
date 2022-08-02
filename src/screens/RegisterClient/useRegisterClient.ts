@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Option } from "../../components/Dropdown";
 import { database } from "../../database";
 import { OwnerModel } from "../../database/model/ownerModel";
 import { PurchaserModel } from "../../database/model/purchaserModel";
@@ -33,6 +34,8 @@ export function useRegisterClient() {
   const [isPurchaserActivate, setIsPurchaserActivate] = useState(false);
   const [message, setMessage] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState('');
+  const [selectedRegion, setSelectedRegion] = useState('');
 
   const handleOnPurchaser = () => {
     setIsPurchaserActivate(!isPurchaserActivate);
@@ -44,6 +47,37 @@ export function useRegisterClient() {
     setIsPurchaserActivate(false);
   }
 
+  const getUserDataSelect = (option: Option) => {
+    console.log(option);
+
+    if (option.data === "rent") {
+      setSelectedMethod("rent");
+    }
+
+    setSelectedMethod("buy");
+  };
+
+
+  const getPropertyDataSelect = (option: Option) => {
+    if (option.data === "north") {
+      setSelectedRegion("north");
+    }
+
+    if (option.data === "south") {
+      setSelectedRegion("south");
+    }
+
+    if (option.data === "west") {
+      setSelectedRegion("west");
+    }
+
+    if (option.data === "east") {
+      setSelectedRegion("east");
+    }
+
+    setSelectedRegion("center");
+  };
+
   async function handleCreateOwner(data: CreateOwnerData) {
     await database.get<OwnerModel>('owners').create(owner => {
       owner.name = data.name,
@@ -54,15 +88,13 @@ export function useRegisterClient() {
         owner.number = data.number,
         owner.street = data.street,
         owner.created_at = Number(new Date()),
-        owner.method = data.method,
+        owner.method = selectedMethod,
         owner.value = data.value
     })
   }
 
   async function handleCreatePurchaser(data: CreatePurchaserData) {
     try {
-      console.log(data.name);
-
       await database.write(async () => {
         await database.get<PurchaserModel>('purchasers').create(purchaser => {
           purchaser.name = data.name,
@@ -70,9 +102,9 @@ export function useRegisterClient() {
             purchaser.description = data.description,
             purchaser.phone = data.phone,
             purchaser.created_at = Number(new Date()),
-            purchaser.method = data.method,
+            purchaser.method = selectedMethod,
             purchaser.value = data.value,
-            purchaser.region = data.region
+            purchaser.region = selectedRegion
         })
       });
 
@@ -92,6 +124,8 @@ export function useRegisterClient() {
     handleCreatePurchaser,
     message,
     showModal,
-    setShowModal
+    setShowModal,
+    getUserDataSelect,
+    getPropertyDataSelect
   }
 }

@@ -20,7 +20,7 @@ export class PurchaserModel extends Model {
   created_at: number;
 
   @field('value')
-  value!: number;
+  value!: string;
 
   @field('city')
   city!: string;

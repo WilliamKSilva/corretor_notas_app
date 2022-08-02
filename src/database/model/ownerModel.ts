@@ -20,7 +20,7 @@ export class OwnerModel extends Model {
   created_at: number;
 
   @field('value')
-  value!: number;
+  value!: string;
 
   @field('street')
   street!: string;

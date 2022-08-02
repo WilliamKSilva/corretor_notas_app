@@ -1,5 +1,5 @@
 type RootStackParamList = {
-  DetailsClient: { clientId: string };
+  DetailsClient: { clientId: string, type: string; };
 };
 
 export { RootStackParamList };

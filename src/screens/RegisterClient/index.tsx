@@ -20,20 +20,22 @@ export default function RegisterClient() {
     handleCreatePurchaser,
     message,
     showModal,
-    setShowModal
+    setShowModal,
+    getUserDataSelect,
+    getPropertyDataSelect
   } = useRegisterClient();
 
   const handleShowForms = () => {
 
     if (isOwnerActivate) {
       return (
-        <OwnerForm control={control} />
+        <OwnerForm control={control} getUserDataSelect={getUserDataSelect} getPropertyDataSelect={getPropertyDataSelect} />
       )
     }
 
     if (isPurchaserActivate) {
       return (
-        <PurchaserForm control={control} />
+        <PurchaserForm control={control} getUserDataSelect={getUserDataSelect} getPropertyDataSelect={getPropertyDataSelect} />
       )
     }
 

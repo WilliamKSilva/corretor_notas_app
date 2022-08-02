@@ -25,7 +25,7 @@ export const purchaserSchema = tableSchema({
     },
     {
       name: 'value',
-      type: 'number'
+      type: 'string'
     },
     {
       name: 'city',

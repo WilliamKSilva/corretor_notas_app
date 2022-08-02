@@ -25,7 +25,7 @@ export const ownerSchema = tableSchema({
     },
     {
       name: 'value',
-      type: 'number'
+      type: 'string'
     },
     {
       name: 'street',
