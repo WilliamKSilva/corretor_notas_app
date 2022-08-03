@@ -17,6 +17,7 @@ export default function RegisterClient() {
     isPurchaserActivate,
     handleOnOwner,
     handleOnPurchaser,
+    handleCreateOwner,
     handleCreatePurchaser,
     message,
     showModal,
@@ -24,6 +25,8 @@ export default function RegisterClient() {
     getUserDataSelect,
     getPropertyDataSelect
   } = useRegisterClient();
+
+  const renderButtonCondition = isOwnerActivate || isPurchaserActivate;
 
   const handleShowForms = () => {
 
@@ -42,6 +45,14 @@ export default function RegisterClient() {
     return (
       <Message>Selecione uma opção...</Message>
     );
+  };
+
+  const handleCreateClient = () => {
+    if (isPurchaserActivate) {
+      return handleCreatePurchaser
+    } else {
+      return handleCreateOwner
+    }
   }
 
   return (
@@ -79,7 +90,7 @@ export default function RegisterClient() {
         {handleShowForms()}
       </ScrollView>
       <WrapperButton>
-        <Button title="Salvar Cliente" onPress={handleSubmit(handleCreatePurchaser)} />
+        {renderButtonCondition ? <Button title="Salvar Cliente" onPress={handleSubmit(handleCreateClient())} /> : null}
       </WrapperButton>
       <NativeModal description={message} isVisible={showModal} setIsVisible={setShowModal} />
     </Container>

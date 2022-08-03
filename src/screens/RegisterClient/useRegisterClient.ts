@@ -10,7 +10,7 @@ type CreateOwnerData = {
   phone: string;
   description: string;
   method: string;
-  value: number;
+  value: string;
   street: string;
   city: string;
   district: string;
@@ -22,7 +22,7 @@ type CreatePurchaserData = {
   phone: string;
   description: string;
   method: string;
-  value: number;
+  value: string;
   city: string;
   region: string;
 }
@@ -48,7 +48,6 @@ export function useRegisterClient() {
   }
 
   const getUserDataSelect = (option: Option) => {
-    console.log(option);
 
     if (option.data === "rent") {
       setSelectedMethod("rent");
@@ -79,18 +78,28 @@ export function useRegisterClient() {
   };
 
   async function handleCreateOwner(data: CreateOwnerData) {
-    await database.get<OwnerModel>('owners').create(owner => {
-      owner.name = data.name,
-        owner.city = data.city,
-        owner.description = data.description,
-        owner.phone = data.phone,
-        owner.district = data.district,
-        owner.number = data.number,
-        owner.street = data.street,
-        owner.created_at = Number(new Date()),
-        owner.method = selectedMethod,
-        owner.value = data.value
-    })
+    try {
+      await database.write(async () => {
+        await database.get<OwnerModel>('owners').create(owner => {
+          owner.name = data.name,
+            owner.city = data.city,
+            owner.description = data.description,
+            owner.phone = data.phone,
+            owner.district = data.district,
+            owner.number = data.number,
+            owner.street = data.street,
+            owner.created_at = Number(new Date()),
+            owner.method = selectedMethod,
+            owner.value = data.value
+        });
+      });
+
+      setMessage('Cliente cadastrado com sucesso');
+      setShowModal(!showModal);
+    } catch (error) {
+      setMessage('Erro ao cadastrar cliente');
+      setShowModal(!showModal);
+    }
   }
 
   async function handleCreatePurchaser(data: CreatePurchaserData) {
@@ -122,6 +131,7 @@ export function useRegisterClient() {
     handleOnPurchaser,
     handleOnOwner,
     handleCreatePurchaser,
+    handleCreateOwner,
     message,
     showModal,
     setShowModal,
