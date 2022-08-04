@@ -1,5 +1,5 @@
 # Notas do Corretor
-Aplicação feita para auxiliar corretores de imóvel a organizarem seus clientes.
+Aplicação feita para auxiliar corretores de imovéis a organizarem seus clientes.
 
 # Features atuais:
 - Cadastro, filtragem e visualização dos clientes.
