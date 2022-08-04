@@ -1,6 +1,8 @@
 # Notas do Corretor
 Aplicação feita para auxiliar corretores de imovéis a organizarem seus clientes.
 
+Vídeo curto de demonstração ao final da leitura 👇 
+
 # Features atuais:
 - Cadastro, filtragem e visualização dos clientes.
 
@@ -22,3 +24,4 @@ yarn
 npx react-native start
 npx react-native run-android
 ```
+![corretor_notas](https://user-images.githubusercontent.com/75429175/182957032-736b652e-5785-4a5b-beee-6079c7869a46.gif)
