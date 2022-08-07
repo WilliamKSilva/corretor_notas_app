@@ -1,7 +1,7 @@
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { database } from "../../database";
-import { OwnerModel } from "../../database/model/ownerModel";
+import { TenantModel } from "../../database/model/tenantModel";
 import { PurchaserModel } from "../../database/model/purchaserModel";
 import { IClient } from "../../interfaces/IClient";
 import { RootStackParamList } from "../../navigation/types";
@@ -19,7 +19,7 @@ export function useDetailsClient() {
   };
 
   async function getOwners() {
-    const response = await database.get<OwnerModel>("owners").find(params.clientId);
+    const response = await database.get<TenantModel>("tenants").find(params.clientId);
 
     setClientData(response);
   };

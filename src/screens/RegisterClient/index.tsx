@@ -17,7 +17,7 @@ export default function RegisterClient() {
     isPurchaserActivate,
     handleOnOwner,
     handleOnPurchaser,
-    handleCreateOwner,
+    handleCreateTenant,
     handleCreatePurchaser,
     message,
     showModal,
@@ -51,7 +51,7 @@ export default function RegisterClient() {
     if (isPurchaserActivate) {
       return handleCreatePurchaser
     } else {
-      return handleCreateOwner
+      return handleCreateTenant
     }
   }
 

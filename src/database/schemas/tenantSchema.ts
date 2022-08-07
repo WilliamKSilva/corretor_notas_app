@@ -1,7 +1,7 @@
 import { appSchema, tableSchema } from "@nozbe/watermelondb";
 
-export const ownerSchema = tableSchema({
-  name: 'owners',
+export const tenantSchema = tableSchema({
+  name: 'tenants',
   columns: [
     {
       name: 'name',

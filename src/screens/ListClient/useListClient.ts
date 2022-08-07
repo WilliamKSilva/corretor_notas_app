@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { database } from "../../database";
-import { OwnerModel } from "../../database/model/ownerModel";
+import { OwnerModel } from "../../database/model/tenantModel";
 import { PurchaserModel } from "../../database/model/purchaserModel";
 import { useFocusEffect } from '@react-navigation/native';
 

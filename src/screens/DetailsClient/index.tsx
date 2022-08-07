@@ -9,7 +9,7 @@ export default function DetailsClient() {
   return (
     <Container>
       <Header>
-        <Title>William Kelvin</Title>
+        <Title>{clientData.name}</Title>
       </Header>
       {params.type === "purchasers" ? (
         <DetailsClientPurchaser data={clientData} />

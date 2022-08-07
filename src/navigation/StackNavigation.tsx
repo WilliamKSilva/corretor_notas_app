@@ -11,6 +11,9 @@ export default function StackNavigation() {
       <Stack.Screen
         name="DetailsClient"
         component={DetailsClient}
+        options={{
+          title: "Detalhes do cliente"
+        }}
       />
       <Stack.Screen
         name="TabBar"

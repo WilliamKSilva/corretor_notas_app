@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Option } from "../../components/Dropdown";
 import { database } from "../../database";
-import { OwnerModel } from "../../database/model/ownerModel";
+import { TenantModel } from "../../database/model/tenantModel";
 import { PurchaserModel } from "../../database/model/purchaserModel";
 
 type CreateOwnerData = {
@@ -77,20 +77,20 @@ export function useRegisterClient() {
     setSelectedRegion("center");
   };
 
-  async function handleCreateOwner(data: CreateOwnerData) {
+  async function handleCreateTenant(data: CreateOwnerData) {
     try {
       await database.write(async () => {
-        await database.get<OwnerModel>('owners').create(owner => {
-          owner.name = data.name,
-            owner.city = data.city,
-            owner.description = data.description,
-            owner.phone = data.phone,
-            owner.district = data.district,
-            owner.number = data.number,
-            owner.street = data.street,
-            owner.created_at = Number(new Date()),
-            owner.method = selectedMethod,
-            owner.value = data.value
+        await database.get<TenantModel>('tenants').create(tenant => {
+          tenant.name = data.name,
+            tenant.city = data.city,
+            tenant.description = data.description,
+            tenant.phone = data.phone,
+            tenant.district = data.district,
+            tenant.number = data.number,
+            tenant.street = data.street,
+            tenant.created_at = Number(new Date()),
+            tenant.method = selectedMethod,
+            tenant.value = data.value
         });
       });
 
@@ -131,7 +131,7 @@ export function useRegisterClient() {
     handleOnPurchaser,
     handleOnOwner,
     handleCreatePurchaser,
-    handleCreateOwner,
+    handleCreateTenant,
     message,
     showModal,
     setShowModal,
