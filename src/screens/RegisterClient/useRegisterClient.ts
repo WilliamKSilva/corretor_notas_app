@@ -10,7 +10,7 @@ type CreateClientData = {
   method: string;
   value: string;
   city: string;
-}
+};
 
 export function useRegisterClient() {
   const [isPurchaserActive, setIsPurchaserActive] = useState(false);
@@ -30,8 +30,6 @@ export function useRegisterClient() {
     setIsTenantActive(!isTenantActive);
     setIsPurchaserActive(false);
   }
-
-  console.log(selectedMethod);
 
   async function handleCreateClient(data: CreateClientData) {
 
@@ -63,6 +61,7 @@ export function useRegisterClient() {
     showModal,
     setShowModal,
     isPurchaserActive,
-    isTenantActive
+    isTenantActive,
+    selectedMethod
   }
 }

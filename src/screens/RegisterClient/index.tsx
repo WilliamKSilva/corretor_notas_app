@@ -20,7 +20,8 @@ export default function RegisterClient() {
     setShowModal,
     handleCreateClient,
     isPurchaserActive,
-    isTenantActive
+    isTenantActive,
+    selectedMethod
   } = useRegisterClient();
 
   const renderButtonCondition = isTenantActive || isPurchaserActive;
@@ -57,7 +58,7 @@ export default function RegisterClient() {
         </WrapperOptionsButton>
       </Header>
       <ScrollView>
-        <ClientForm control={control} />
+        {selectedMethod ? <ClientForm control={control} /> : <Message>Selecione um tipo de cliente...</Message>}
       </ScrollView>
       <WrapperButton>
         {renderButtonCondition ? <Button title="Salvar Cliente" onPress={handleSubmit(handleCreateClient)} /> : null}

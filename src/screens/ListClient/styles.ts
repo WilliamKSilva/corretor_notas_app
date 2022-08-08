@@ -24,8 +24,7 @@ export const WrapperDropdown = styled.View`
 `;
 
 export const Content = styled.View`
-  width: 100%;
-  align-items: center;
+  flex: 1;
   padding-top: 10%;
 `;
 

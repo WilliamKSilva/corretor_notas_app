@@ -23,7 +23,7 @@ export default function ListClient() {
     if (clientType.data === 'purchasers') {
       const purchasersFiltered = purchasers.filter((purchaser) => {
         if (!value) return true;
-        if (purchaser.name.toLowerCase().includes(value)) {
+        if (purchaser.district.toLowerCase().includes(value) || purchaser.district.toLocaleUpperCase().includes(value)) {
           return true;
         };
       });
@@ -32,14 +32,14 @@ export default function ListClient() {
     };
 
     if (clientType.data === 'tenants') {
-      const ownersFiltered = tenants.filter((tenant) => {
+      const tenantsFiltered = tenants.filter((tenant) => {
         if (!value) return true;
-        if (tenant.name.toLowerCase().includes(value)) {
+        if (tenant.district.toLowerCase().includes(value) || tenant.district.toLocaleUpperCase().includes(value)) {
           return true;
         }
       });
 
-      setNewData(ownersFiltered);
+      setNewData(tenantsFiltered);
     };
   };
 
@@ -85,7 +85,7 @@ export default function ListClient() {
           )}
         />
         <InputSearch
-          placeholder="Procure um cliente pelo nome..."
+          placeholder="Procure pelo bairro..."
           onChangeText={(value) => filterClients(value)}
         />
       </WrapperDropdown>

@@ -9,14 +9,9 @@ type ClientType = {
   label: 'Compradores' | 'Locatários';
 };
 
-export interface ClientData {
-  name: string;
-  phone: string;
-}
-
 export function useListClient() {
-  const [tenants, setTenants] = useState<ClientData[]>([]);
-  const [purchasers, setPurchasers] = useState<ClientData[]>([]);
+  const [tenants, setTenants] = useState<ClientModel[]>([]);
+  const [purchasers, setPurchasers] = useState<ClientModel[]>([]);
   const [clientType, setClientType] = useState<ClientType>({ label: 'Locatários', data: 'tenants' });
   const [newData, setNewData] = useState([]);
 
@@ -36,6 +31,7 @@ export function useListClient() {
 
   useFocusEffect(
     useCallback(() => {
+      setClientType({ label: "Locatários", data: "tenants" });
       const initialClientData = getTenants();
 
       return () => initialClientData;

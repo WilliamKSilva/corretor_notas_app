@@ -32,7 +32,8 @@ export const WrapperButton = styled.View`
 export const Message = styled.Text`
   width: 100%;
   margin-top: 40%;
-  margin-left: 25%;
+  margin-left: 17%;
+  font-weight: 400;
   font-size: ${({ theme }) => theme.fontsize.font_medium}px;
-  color: ${({ theme }) => theme.colors.placeholder};
+  color: ${({ theme }) => theme.colors.black};
 `;
