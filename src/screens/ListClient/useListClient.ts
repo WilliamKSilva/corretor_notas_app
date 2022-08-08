@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { database } from "../../database";
-import { OwnerModel } from "../../database/model/tenantModel";
-import { PurchaserModel } from "../../database/model/purchaserModel";
+import { ClientModel } from "../../database/model/clientModel";
 import { useFocusEffect } from '@react-navigation/native';
+import { Q } from "@nozbe/watermelondb";
 
 type ClientType = {
-  data: 'purchasers' | 'owners';
-  label: 'Compradores' | 'Proprietários';
+  data: 'purchasers' | 'tenants';
+  label: 'Compradores' | 'Locatários';
 };
 
 export interface ClientData {
@@ -15,30 +15,28 @@ export interface ClientData {
 }
 
 export function useListClient() {
+  const [tenants, setTenants] = useState<ClientData[]>([]);
   const [purchasers, setPurchasers] = useState<ClientData[]>([]);
-  const [owners, setOwners] = useState<ClientData[]>([]);
-  const [clientType, setClientType] = useState<ClientType>({ label: 'Compradores', data: 'purchasers' });
+  const [clientType, setClientType] = useState<ClientType>({ label: 'Locatários', data: 'tenants' });
   const [newData, setNewData] = useState([]);
 
+  async function getTenants() {
+    const response = await database.get<ClientModel>('clients').query(Q.where('method', 'tenant')).fetch();
+
+    setTenants(response);
+    setNewData(response);
+  };
+
   async function getPurchasers() {
-    const purchaserCollection = database.get<PurchaserModel>('purchasers');
-    const response = await purchaserCollection.query().fetch();
+    const response = await database.get<ClientModel>('clients').query(Q.where('method', 'purchaser')).fetch();
 
     setPurchasers(response);
     setNewData(response);
   };
 
-  async function getOwners() {
-    const ownersCollection = database.get<OwnerModel>('owners');
-    const response = await ownersCollection.query().fetch();
-
-    setOwners(response);
-    setNewData(response);
-  }
-
   useFocusEffect(
     useCallback(() => {
-      const initialClientData = getPurchasers();
+      const initialClientData = getTenants();
 
       return () => initialClientData;
     }, [])
@@ -47,19 +45,20 @@ export function useListClient() {
   const handleSelectClientType = (value) => {
     setClientType(value);
 
-    if (value.data === 'purchasers') {
-      getPurchasers();
+    if (value.data === "tenants") {
+      getTenants();
     }
 
-    if (value.data === 'owners') {
-      getOwners();
+    if (value.data === "purchasers") {
+      getPurchasers();
     }
   };
 
   return {
     purchasers,
-    setPurchasers,
-    owners,
+    getPurchasers,
+    tenants,
+    getTenants,
     clientType,
     setClientType,
     newData,

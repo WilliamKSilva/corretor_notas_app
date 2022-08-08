@@ -3,7 +3,7 @@ import { Button } from "../../components/Button";
 import { ButtonIcon } from "../../components/ButtonIcon";
 import { Text } from "../../components/Text";
 import { FontAwesome5 } from '@expo/vector-icons';
-import { PurchaserForm, OwnerForm } from "./Forms";
+import { ClientForm } from "./Forms";
 import { useRegisterClient } from "./useRegisterClient";
 import { Container, Header, ScrollView, WrapperButton, Message, WrapperOptionsButton } from "./styles";
 import { useForm } from "react-hook-form";
@@ -13,47 +13,17 @@ export default function RegisterClient() {
   const { handleSubmit, control } = useForm();
 
   const {
-    isOwnerActivate,
-    isPurchaserActivate,
-    handleOnOwner,
+    handleOnTenant,
     handleOnPurchaser,
-    handleCreateTenant,
-    handleCreatePurchaser,
     message,
     showModal,
     setShowModal,
-    getUserDataSelect,
-    getPropertyDataSelect
+    handleCreateClient,
+    isPurchaserActive,
+    isTenantActive
   } = useRegisterClient();
 
-  const renderButtonCondition = isOwnerActivate || isPurchaserActivate;
-
-  const handleShowForms = () => {
-
-    if (isOwnerActivate) {
-      return (
-        <OwnerForm control={control} />
-      )
-    }
-
-    if (isPurchaserActivate) {
-      return (
-        <PurchaserForm control={control} />
-      )
-    }
-
-    return (
-      <Message>Selecione uma opção...</Message>
-    );
-  };
-
-  const handleCreateClient = () => {
-    if (isPurchaserActivate) {
-      return handleCreatePurchaser
-    } else {
-      return handleCreateTenant
-    }
-  }
+  const renderButtonCondition = isTenantActive || isPurchaserActive;
 
   return (
     <Container>
@@ -63,9 +33,9 @@ export default function RegisterClient() {
         </Text>
         <WrapperOptionsButton>
           <ButtonIcon
-            title="Proprietário"
-            onPress={() => handleOnOwner()}
-            active={isOwnerActivate}
+            title="Locatário"
+            onPress={() => handleOnTenant()}
+            active={isTenantActive}
           >
             <FontAwesome5
               name="house-user"
@@ -76,7 +46,7 @@ export default function RegisterClient() {
           <ButtonIcon
             title="Comprador"
             onPress={() => handleOnPurchaser()}
-            active={isPurchaserActivate}
+            active={isPurchaserActive}
           >
             <FontAwesome5
               name="money-bill-alt"
@@ -87,10 +57,10 @@ export default function RegisterClient() {
         </WrapperOptionsButton>
       </Header>
       <ScrollView>
-        {handleShowForms()}
+        <ClientForm control={control} />
       </ScrollView>
       <WrapperButton>
-        {renderButtonCondition ? <Button title="Salvar Cliente" onPress={handleSubmit(handleCreateClient())} /> : null}
+        {renderButtonCondition ? <Button title="Salvar Cliente" onPress={handleSubmit(handleCreateClient)} /> : null}
       </WrapperButton>
       <NativeModal description={message} isVisible={showModal} setIsVisible={setShowModal} />
     </Container>

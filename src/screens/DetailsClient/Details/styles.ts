@@ -14,7 +14,8 @@ export const Row = styled.View`
 `;
 
 export const Column = styled.View`
-  width: 90%;
+  width: 100%;  
+  justify-content: center;
   align-items: center;
 `;
 
@@ -29,5 +30,5 @@ export const Description = styled.Text`
   font-size: ${({ theme }) => theme.fontsize.font_medium}px;
   color: ${({ theme }) => theme.colors.black};
   margin-top: 10%;
-  text-align: center;
+  margin-right: 2%;
 `;

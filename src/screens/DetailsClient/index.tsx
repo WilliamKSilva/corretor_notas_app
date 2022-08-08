@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Header, Title } from "./styles";
-import { DetailsClientPurchaser, DetailsClientOwner } from './Details';
+import { Details } from './Details';
 import { useDetailsClient } from "./useDetailsClient";
 
 export default function DetailsClient() {
@@ -11,11 +11,7 @@ export default function DetailsClient() {
       <Header>
         <Title>{clientData.name}</Title>
       </Header>
-      {params.type === "purchasers" ? (
-        <DetailsClientPurchaser data={clientData} />
-      ) : (
-        <DetailsClientOwner data={clientData} />
-      )}
+      <Details data={clientData} />
     </Container>
   )
 }

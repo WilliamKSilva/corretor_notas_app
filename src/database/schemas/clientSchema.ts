@@ -1,7 +1,7 @@
-import { appSchema, tableSchema } from "@nozbe/watermelondb";
+import { tableSchema } from "@nozbe/watermelondb";
 
-export const purchaserSchema = tableSchema({
-  name: 'purchasers',
+export const clientSchema = tableSchema({
+  name: 'clients',
   columns: [
     {
       name: 'name',
@@ -12,16 +12,12 @@ export const purchaserSchema = tableSchema({
       type: 'string'
     },
     {
-      name: 'description',
+      name: 'district',
       type: 'string'
     },
     {
       name: 'method',
       type: 'string'
-    },
-    {
-      name: 'created_at',
-      type: 'number'
     },
     {
       name: 'value',
@@ -31,9 +27,5 @@ export const purchaserSchema = tableSchema({
       name: 'city',
       type: 'string'
     },
-    {
-      name: 'region',
-      type: 'string'
-    }
   ]
 }); 

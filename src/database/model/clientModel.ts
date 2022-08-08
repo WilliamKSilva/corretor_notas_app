@@ -1,8 +1,8 @@
 import { Model } from "@nozbe/watermelondb";
 import { field } from "@nozbe/watermelondb/decorators";
 
-export class PurchaserModel extends Model {
-  static table = 'purchasers'
+export class ClientModel extends Model {
+  static table = 'clients'
 
   @field('name')
   name!: string;
@@ -10,21 +10,15 @@ export class PurchaserModel extends Model {
   @field('phone')
   phone!: string;
 
-  @field('description')
-  description!: string;
+  @field('district')
+  district!: string;
 
   @field('method')
   method!: string;
-
-  @field('created_at')
-  created_at: number;
 
   @field('value')
   value!: string;
 
   @field('city')
   city!: string;
-
-  @field('region')
-  region!: string;
 }

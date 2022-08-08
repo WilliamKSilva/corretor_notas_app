@@ -1,7 +1,6 @@
 import { Container, Content, Header, Image, List, Message, WrapperDropdown } from "./styles";
 import { Client } from "../../components/Client";
 import { useListClient } from "./useListClient";
-import SearchingImage from '../../assets/undraw_Searching.png';
 import SelectDropdown from 'react-native-select-dropdown';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from "styled-components/native";
@@ -16,19 +15,15 @@ type ListClientProps = {
   }
 };
 
-type teste = {
-  name: string;
-}
-
 export default function ListClient() {
-  const { purchasers, clientType, owners, newData, setNewData, handleSelectClientType } = useListClient();
+  const { purchasers, clientType, tenants, newData, setNewData, handleSelectClientType } = useListClient();
   const { colors } = useTheme();
 
   const filterClients = (value: string) => {
     if (clientType.data === 'purchasers') {
-      const purchasersFiltered = purchasers.filter((client) => {
+      const purchasersFiltered = purchasers.filter((purchaser) => {
         if (!value) return true;
-        if (client.name.toLowerCase().includes(value)) {
+        if (purchaser.name.toLowerCase().includes(value)) {
           return true;
         };
       });
@@ -36,10 +31,10 @@ export default function ListClient() {
       setNewData(purchasersFiltered);
     };
 
-    if (clientType.data === 'owners') {
-      const ownersFiltered = owners.filter((client) => {
+    if (clientType.data === 'tenants') {
+      const ownersFiltered = tenants.filter((tenant) => {
         if (!value) return true;
-        if (client.name.toLowerCase().includes(value)) {
+        if (tenant.name.toLowerCase().includes(value)) {
           return true;
         }
       });
@@ -54,8 +49,8 @@ export default function ListClient() {
       label: "Compradores"
     },
     {
-      data: "owners",
-      label: "Proprietários"
+      data: "tenants",
+      label: "Locatários"
     }
   ];
 
