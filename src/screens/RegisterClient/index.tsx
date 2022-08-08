@@ -32,13 +32,13 @@ export default function RegisterClient() {
 
     if (isOwnerActivate) {
       return (
-        <OwnerForm control={control} getUserDataSelect={getUserDataSelect} getPropertyDataSelect={getPropertyDataSelect} />
+        <OwnerForm control={control} />
       )
     }
 
     if (isPurchaserActivate) {
       return (
-        <PurchaserForm control={control} getUserDataSelect={getUserDataSelect} getPropertyDataSelect={getPropertyDataSelect} />
+        <PurchaserForm control={control} />
       )
     }
 

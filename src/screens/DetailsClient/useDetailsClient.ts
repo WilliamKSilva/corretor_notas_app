@@ -18,7 +18,7 @@ export function useDetailsClient() {
     setClientData(response);
   };
 
-  async function getOwners() {
+  async function getTenants() {
     const response = await database.get<TenantModel>("tenants").find(params.clientId);
 
     setClientData(response);
@@ -29,7 +29,7 @@ export function useDetailsClient() {
       getPurchasers();
     };
 
-    getOwners();
+    getTenants();
   }, []);
 
   return {

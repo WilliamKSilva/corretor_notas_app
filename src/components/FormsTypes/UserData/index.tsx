@@ -7,21 +7,9 @@ import { Container, Header, Text } from './styles';
 
 type UserDataProps = {
   control: Control;
-  getCurrentDropdownValue: (value) => void;
 }
 
-export const UserData = ({ control, getCurrentDropdownValue }: UserDataProps) => {
-
-  const options = [
-    {
-      label: "Aluguel",
-      data: "rent"
-    },
-    {
-      label: "Compra",
-      data: "buy"
-    }
-  ]
+export const UserData = ({ control }: UserDataProps) => {
 
   return (
     <Container>
@@ -45,15 +33,10 @@ export const UserData = ({ control, getCurrentDropdownValue }: UserDataProps) =>
         mask="phone"
         required
       />
-      <Dropdown
-        placeholder="Método..."
-        getCurrentValue={getCurrentDropdownValue}
-        options={options}
-      />
       <InputDescriptionForm
-        name="description"
+        name="district"
         control={control}
-        placeholder="Descrição..."
+        placeholder="Bairro(s)..."
         type="default"
         required
       />
